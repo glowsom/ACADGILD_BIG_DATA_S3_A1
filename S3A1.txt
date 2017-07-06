@@ -29,16 +29,17 @@ YARN:	The goal of YARN is to accomodate all types of distributed computation too
 it was realized that MapReduce wasn't capable of solving many big data problems. As a result other tools were developed with distributed
 compautation capabilities. Without YARN there will have to be separate clusters for every distributed computation system, which means
 when using a tool (like Spark) to work on data in another cluster, that data will have to be copied into the Spark's cluster
-to be worked on. This is neither convenient nor efficient (waste of time and resources). Cluster resource (eg. CPU, Memory, Disc I/O,
-Network Bandwidth of all machines) management and job scheduling was taken away from MapReduce, and given to YARN. So YARN provides APIs
-to every tool in the Hadoop environment for requesting and working with the hadoop cluster resources. YARN is composed of a Resource
-Manager, Stand-by Resource Manager (becomes active when Resource Manager is down), Node Manager, and Containers. There is one Resource
-Manager per cluster, and one Node Manager per node. When a job is submitted to YARN, it goes to the Resource Manager. The Resource
-manager inites the job by getting a Node Manager to launch a Container. A Countainer is a feature that allows the allocation of limited
-resources. The first container is the application master; it is responsible for completing the job. Depending on the Tool through which
-the job was submitted to YARN, the Application Master will work differently. This is what allows YARN to accomodate the different tools
-available in Hadoop ecosystem. depending on the job, the first Application Master will request for more resources (containers) from the
-Resource Manager, so it can start executing the tasks needed to complete the job. After Resource Manager allocates containers to
-Application Master (AP), it(AP) reaches out to the Node Managers of those Containers to launch the Containers and execute the tasks.
+to be worked on. This is neither convenient nor efficient (waste of time and resources).
+Cluster resource (eg. CPU, Memory, Disc I/O, Network Bandwidth of all machines) management and job scheduling was taken away from
+MapReduce, and given to YARN. So YARN provides APIs to every tool in the Hadoop environment for requesting and working with the hadoop
+cluster resources. 
+YARN is composed of a Resource Manager, Stand-by Resource Manager (becomes active when Resource Manager is down), Node Manager, and Containers. There is one Resource Manager per cluster, and one Node Manager per node.
+When a job is submitted to YARN, it goes to the Resource Manager. The Resource Manager inites the job by getting a Node Manager to
+launch a Container.
+A Countainer is a feature that allows the allocation of limited resources. The first container is the application master; it is
+responsible for completing the job. Depending on the Tool through which the job was submitted to YARN, the Application Master will work differently. This is what allows YARN to accomodate the different tools available in Hadoop ecosystem. Depending on the job, the first
+Application Master will request for more resources (containers) from the Resource Manager, so it can start executing the tasks needed to
+complete the job. After Resource Manager allocates containers to Application Master (AM), it(AM) reaches out to the Node Managers of
+those Containers to launch the Containers and execute the tasks.
 Tasks directly report their status back to the Application Master. When the job is complete, all Containers (including Application
 Master) perform clean up and terminate.
